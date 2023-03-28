@@ -17,9 +17,13 @@ fn denary_conversion()  {
 	denary_array_str := os.input('Enter your array, with spaces seperating it\n')
 	denary_array := utilities.to_u8_array(denary_array_str.split(' '))
 
-	mut offset := 0
-	println(reader.read_int(denary_array,  mut &offset))
-	println(reader.read_int(denary_array,  mut &offset))
+	mut r := reader.Reader {
+		bytes: denary_array
+		offset: 0
+	}
+
+	println(r.read_int())
+	println(r.read_int())
 	os.input('')
 }
 
@@ -27,8 +31,13 @@ fn hexadecimal_conversion() ! {
 	hex_array_str := os.input('Enter your array, with spaces seperating it\n')
 	hex_array := decode(hex_array_str.replace(' ', ''))!
 
-	mut offset := 0
-	println(reader.read_int(hex_array, mut &offset))
-	println(reader.read_int(hex_array, mut &offset))
+	mut r := reader.Reader {
+		bytes: hex_array
+		offset: 0
+	}
+
+	println(r.read_int())
+	println(r.read_int())
+
 	os.input('')
 }
