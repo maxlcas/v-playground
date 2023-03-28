@@ -1,9 +1,18 @@
 module reader
 
-pub fn read_int(bytes []u8, mut offset &int) int {
+pub struct Reader {
+	bytes []u8
+mut:
+	offset int
+}
+pub fn (mut reader Reader) read_int() int {
 	defer {
-		offset += 4
+		reader.offset += 4
 	}
+
+	bytes := reader.bytes
+	offset := &reader.offset
+
 	return bytes[*offset] | ( int(bytes[*offset + 1]) << 8 ) | ( int(bytes[*offset + 2]) << 16 ) | ( int(bytes[*offset + 3]) << 24 )
 }
 
